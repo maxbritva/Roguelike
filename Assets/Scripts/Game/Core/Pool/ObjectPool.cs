@@ -6,17 +6,11 @@ namespace Game.Core.Pool
 {
 	public class ObjectPool: MonoBehaviour, IFactory<GameObject>
 	{
-		private GameObject _prefab;
-		private List<GameObject> _objectsPool;
+		[SerializeField] private GameObject _prefab;
+		private List<GameObject> _objectsPool = new List<GameObject>();
 		[Inject] private DiContainer _container;
 
-		public ObjectPool(GameObject prefab, int prewarmCountObjects)
-		{
-			_prefab = prefab;
-			_objectsPool = new List<GameObject>();
-			for (int i = 0; i < prewarmCountObjects; i++) 
-				Create();
-		}
+		private void Awake() => Create();
 
 		private void SetActiveObject(GameObject objectToRelease, bool value) => objectToRelease.gameObject.SetActive(value);
 

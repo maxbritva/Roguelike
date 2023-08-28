@@ -117,8 +117,8 @@ GameObject:
   - component: {fileID: 3521406599105903186}
   - component: {fileID: 6903101137377744029}
   - component: {fileID: 6735851283782001143}
-  - component: {fileID: 7106517366125931570}
   - component: {fileID: 2098329344404294329}
+  - component: {fileID: 9012600144199177887}
   m_Layer: 0
   m_Name: EnemySlime
   m_TagString: Untagged
@@ -191,19 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 2
   _animator: {fileID: 1187893817430488628}
---- !u!114 &7106517366125931570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5057088271795976562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bceb5414caf14fe9b80e473b8c0975dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 10
 --- !u!114 &2098329344404294329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,3 +204,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
+--- !u!114 &9012600144199177887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5057088271795976562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a35817e0c149e29c98eff326832a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 30
+  _currentHealth: 0

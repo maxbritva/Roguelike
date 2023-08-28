@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Game.Core.Pool;
 using Game.Player;
 using UnityEngine;
@@ -10,18 +9,13 @@ namespace Game.Enemy
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject _enemyPrefab;
         [SerializeField] private float _timeToSpawn;
+        [SerializeField] private Transform _minPoint,_maxPoint;
+        [SerializeField] private Transform _enemyContainer;
+        private ObjectPool _enemyPool;
+        private PlayerController _playerController;
         private WaitForSeconds _interval;
         private Coroutine _spawnCoroutine;
-        private ObjectPool _enemyPool;
-        private PlayerHealth _playerHealth;
-        [Inject] private DiContainer _container; 
-        private void Awake()
-        {
-            _enemyPool = new ObjectPool(_enemyPrefab, 5);
-            _container.Inject(_enemyPool);
-        }
 
         private void Start()
         {
@@ -33,19 +27,39 @@ namespace Game.Enemy
 
         public void Deactivate() => StopCoroutine(_spawnCoroutine);
 
-        [Inject] private void Construct(PlayerHealth playerHealth) => _playerHealth = playerHealth;
+        [Inject] private void Construct(PlayerController playerController, ObjectPool enemyPool)
+        {
+            _playerController = playerController;
+            _enemyPool = enemyPool;
+        }
 
         private IEnumerator Spawn()
         {
             while (true)
             {
+                transform.position = _playerController.transform.position;
                 GameObject newEnemy = _enemyPool.GetFromPool();
-                newEnemy.transform.SetParent(transform);
+                newEnemy.transform.SetParent(_enemyContainer);
                 newEnemy.transform.position = GetRandomSpawnPoint();
                 yield return _interval;
             }
         }
 
-        private Vector3 GetRandomSpawnPoint() => (_playerHealth.transform.position * Random.insideUnitCircle).normalized * 45f;
+        private Vector3 GetRandomSpawnPoint()
+        {
+            Vector3 spawnPoint = Vector3.zero;
+            bool verticalSpawn = Random.Range(0f,1f) > 0.5f;
+            if (verticalSpawn)
+            {
+                spawnPoint.y = Random.Range(_minPoint.position.y,_maxPoint.position.y);
+                spawnPoint.x = Random.Range(0f, 1f) > 0.5f ? _minPoint.position.x : _maxPoint.position.x;
+            }
+            else
+            {
+                spawnPoint.x = Random.Range(_minPoint.position.x,_maxPoint.position.x);
+                spawnPoint.y = Random.Range(0f, 1f) > 0.5f ? _minPoint.position.y : _maxPoint.position.y;
+            }
+            return spawnPoint;
+        }
     }
 }

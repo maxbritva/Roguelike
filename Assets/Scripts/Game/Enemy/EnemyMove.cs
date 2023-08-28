@@ -1,5 +1,4 @@
-﻿using Game.Core;
-using Game.Core.Interfaces;
+﻿using Game.Core.Interfaces;
 using Game.Player;
 using UnityEngine;
 using Zenject;
@@ -22,7 +21,14 @@ namespace Game.Enemy
 			_animator.SetFloat("Horizontal", _movement.x);
 			_animator.SetFloat("Vertical", _movement.y);
 			transform.position += _movement * (_moveSpeed * Time.deltaTime);
+			CheckDistanceToHide();
 		}
-		
+
+		private void CheckDistanceToHide()
+		{
+			float distance = Vector3.Distance(transform.position, _playerController.gameObject.transform.position);
+			if(distance > 27f)
+				gameObject.SetActive(false);
+		}
 	}
 }
