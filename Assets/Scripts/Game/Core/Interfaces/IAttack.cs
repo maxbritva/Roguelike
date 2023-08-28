@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Core
+namespace Game.Core.Interfaces
 {
 	public interface IAttack
 	{
