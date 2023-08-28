@@ -19,9 +19,9 @@ namespace Game.Core.Pool
                 Create();
         }
 
-        private static void SetActiveObject(GameObject objectToRelease, bool value) => objectToRelease.gameObject.SetActive(value);
+        private void SetActiveObject(GameObject objectToRelease, bool value) => objectToRelease.gameObject.SetActive(value);
 
-        private GameObject GetFromPool()
+        public GameObject GetFromPool()
         {
             var newObject = _objectsPool.FirstOrDefault(
                 x => x.gameObject.activeInHierarchy == false);
