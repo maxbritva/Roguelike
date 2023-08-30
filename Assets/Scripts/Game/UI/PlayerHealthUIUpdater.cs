@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Game.Player
+namespace Game.UI
 {
-	public class PlayerUIUpdater : MonoBehaviour
+	public class PlayerHealthUIUpdater : MonoBehaviour
 	{
 		[SerializeField] private Image _playerHealthFill;
 		private PlayerHealth _playerHealth;

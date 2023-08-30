@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core.ExperienceSystem
@@ -7,6 +8,12 @@ namespace Game.Core.ExperienceSystem
 	{
 		public Action<int> OnExperiencePickedUp;
 		private int _currentExperience;
+		private int _experienceToLevelUp = 5;
+		private int _currentLevel = 1;
+
+		public int CurrentExperience => _currentExperience;
+		public int ExperienceToLevelUp => _experienceToLevelUp;
+		public int CurrentLevel => _currentLevel;
 
 		private void OnEnable() => OnExperiencePickedUp += ExperienceAddValue;
 
@@ -18,7 +25,26 @@ namespace Game.Core.ExperienceSystem
 			if (value <= 0)
 				throw new ArgumentOutOfRangeException(nameof(value));
 			_currentExperience += value;
-			Debug.Log(_currentExperience);
+			if (_currentExperience >= _experienceToLevelUp) 
+				LevelUp();
+		}
+
+		private void LevelUp()
+		{
+			_currentExperience = 0;
+			_currentLevel++;
+			switch (_currentLevel)
+			{
+				case <= 20:
+					_experienceToLevelUp += 10;
+					break;
+				case <= 40 and > 20:
+					_experienceToLevelUp += 13;
+					break;
+				case >= 60:
+					_experienceToLevelUp += 16;
+					break;
+			}
 		}
 	}
 }

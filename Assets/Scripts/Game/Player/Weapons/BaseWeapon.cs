@@ -1,4 +1,5 @@
-﻿using Game.Enemy;
+﻿using System;
+using Game.Enemy;
 using Game.FX.DamageText;
 using UnityEngine;
 using Zenject;
@@ -8,9 +9,12 @@ namespace Game.Player.Weapons
 {
 	public abstract class BaseWeapon : MonoBehaviour
 	{
+		[SerializeField] private WeaponStats _weaponStats = new WeaponStats();
 		[SerializeField] private float _damage;
 		private DiContainer _container;
 		private DamageTextSpawner _damageTextSpawner;
+		public WeaponStats WeaponStats => _weaponStats;
+
 		private void OnTriggerEnter2D(Collider2D col)
 		{
 			if (col.gameObject.TryGetComponent(out EnemyHealth health));
@@ -24,10 +28,15 @@ namespace Game.Player.Weapons
 			}
 		}
 		private void Awake() => _container.Inject(this);
+
+		private void Start() => SetStats();
+
 		[Inject] private void Construct(DamageTextSpawner damageTextSpawner, DiContainer container)
 		{
 			_damageTextSpawner = damageTextSpawner;
 			_container = container;
 		}
+
+		protected virtual void SetStats() => _damage = _weaponStats.Damage;
 	}
 }

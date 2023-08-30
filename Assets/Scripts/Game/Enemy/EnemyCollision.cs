@@ -1,8 +1,5 @@
-﻿using Game.FX.DamageText;
-using Game.Player;
-using Game.Player.Weapons;
+﻿using Game.Player;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Enemy
 {
