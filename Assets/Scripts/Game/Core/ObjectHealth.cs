@@ -14,7 +14,7 @@ namespace Game.Core
 
 		private void Start() => _currentHealth = _maxHealth;
 
-		public void TakeDamage(float damage)
+		public virtual void TakeDamage(float damage)
 		{
 			
 			if (damage <= 0)

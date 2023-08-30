@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73459a45bb04138b257452212d87da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 2
+  _moveSpeed: 1.5
   _animator: {fileID: 1187893817430488628}
 --- !u!114 &2098329344404294329
 MonoBehaviour:
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
+  _enemyHealth: {fileID: 9012600144199177887}
 --- !u!114 &9012600144199177887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,5 +217,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a35817e0c149e29c98eff326832a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
+  _maxHealth: 3
   _currentHealth: 0

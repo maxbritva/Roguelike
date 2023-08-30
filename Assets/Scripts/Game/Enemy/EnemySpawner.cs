@@ -7,31 +7,22 @@ using Random = UnityEngine.Random;
 
 namespace Game.Enemy
 {
-    public class EnemySpawner : MonoBehaviour
+    public abstract class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private float _timeToSpawn;
         [SerializeField] private Transform _minPoint,_maxPoint;
         [SerializeField] private Transform _enemyContainer;
-        private ObjectPool _enemyPool;
+        [SerializeField] private ObjectPool _enemyPool;
         private PlayerController _playerController;
         private WaitForSeconds _interval;
         private Coroutine _spawnCoroutine;
 
-        private void Start()
-        {
-            _interval = new WaitForSeconds(_timeToSpawn);
-            Activate();
-        }
+        private void Start() => _interval = new WaitForSeconds(_timeToSpawn);
 
         public void Activate() => _spawnCoroutine = StartCoroutine(Spawn());
-
         public void Deactivate() => StopCoroutine(_spawnCoroutine);
 
-        [Inject] private void Construct(PlayerController playerController, ObjectPool enemyPool)
-        {
-            _playerController = playerController;
-            _enemyPool = enemyPool;
-        }
+        [Inject] private void Construct(PlayerController playerController) => _playerController = playerController;
 
         private IEnumerator Spawn()
         {

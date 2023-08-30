@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Player.Weapons
 {
@@ -12,6 +13,9 @@ namespace Game.Player.Weapons
 		[SerializeField] private Collider2D _collider;
 		private WaitForSeconds _interval = new WaitForSeconds(2.2f);
 		private Coroutine _coroutine;
+		[Inject] private DiContainer _container;
+
+		private void Awake() => _container.Inject(this);
 
 		private void Start() => Activate();
 
@@ -27,6 +31,7 @@ namespace Game.Player.Weapons
 			{
 				_spriteRenderer.enabled = !_spriteRenderer.enabled;
 				_collider.enabled = !_collider.enabled;
+				_collider.isTrigger = !_collider.isTrigger;
 				yield return _interval;
 			}
 		}
