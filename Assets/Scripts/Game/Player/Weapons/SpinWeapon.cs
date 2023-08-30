@@ -11,9 +11,12 @@ namespace Game.Player.Weapons
 		[SerializeField] private SpriteRenderer _spriteRenderer;
 		[SerializeField] private Collider2D _collider;
 		[SerializeField] private Transform _targetWeapon;
-		private WaitForSeconds _interval = new WaitForSeconds(2.2f);
-		private Coroutine _coroutine;
 		[Inject] private DiContainer _container;
+		private WaitForSeconds _interval;
+		private WaitForSeconds _duration;
+		private WaitForSeconds _timeBetweenAttack;
+		private Coroutine _coroutine;
+		private bool _isActivePhase;
 
 		private void Awake() => _container.Inject(this);
 		private void Start()
@@ -32,6 +35,8 @@ namespace Game.Player.Weapons
 			base.SetStats();
 			_rotationSpeed = WeaponStats.Speed;
 			_range = WeaponStats.Range;
+			_duration = new WaitForSeconds(WeaponStats.Duration);
+			_timeBetweenAttack = new WaitForSeconds(WeaponStats.TimeBetweenAttack);
 		}
 
 		private IEnumerator LifeCycle()
@@ -41,6 +46,7 @@ namespace Game.Player.Weapons
 				_spriteRenderer.enabled = !_spriteRenderer.enabled;
 				_collider.enabled = !_collider.enabled;
 				_collider.isTrigger = !_collider.isTrigger;
+				SetupPhase();
 				yield return _interval;
 			}
 		}
@@ -49,6 +55,12 @@ namespace Game.Player.Weapons
 		{
 			_targetWeapon.transform.localPosition = new Vector3(WeaponStats.Range, 0, 0);
 			_collider.offset = new Vector3(WeaponStats.Range, 0, 0);
+		}
+
+		private void SetupPhase()
+		{
+			_isActivePhase = _spriteRenderer.enabled;
+			_interval = _isActivePhase ? _duration : _timeBetweenAttack;
 		}
 		
 	}

@@ -1024,11 +1024,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponStats:
-    _speed: 0
+    _speed: 150
     _damage: 10
-    _range: 0
-    _timeBetweenAttack: 0
-    _duration: 0
+    _range: 2
+    _timeBetweenAttack: 1.5
+    _duration: 2
   _damage: 10
   _rotationSpeed: 220
   _range: 2.5
