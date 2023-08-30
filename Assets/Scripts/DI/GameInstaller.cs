@@ -1,5 +1,5 @@
-﻿using Game.Core.LevelSystem;
-using Game.Enemy.Spawners;
+﻿using Game.Core.ExperienceSystem;
+using Game.Core.LevelSystem;
 using Game.FX.DamageText;
 using Game.Player;
 using UnityEngine;
@@ -14,8 +14,7 @@ namespace DI
 		[SerializeField] private DamageTextSpawner _damageTextSpawner;
 		[SerializeField] private GameTimer _gameTimer;
 		[SerializeField] private LevelSystem _levelSystem;
-		[SerializeField] private SlimeSpawner _slimeSpawner;
-		[SerializeField] private PumaSpawner _pumaSpawner;
+		[SerializeField] private ExperienceSystem _experienceSystem;
 
 		public override void InstallBindings()
 		{
@@ -24,8 +23,7 @@ namespace DI
 			Container.Bind<DamageTextSpawner>().FromInstance(_damageTextSpawner).AsSingle().NonLazy();
 			Container.Bind<GameTimer>().FromInstance(_gameTimer).AsSingle().NonLazy();
 			Container.Bind<LevelSystem>().FromInstance(_levelSystem).AsSingle().NonLazy();
-			Container.Bind<SlimeSpawner>().FromInstance(_slimeSpawner).AsSingle().NonLazy();
-			Container.Bind<PumaSpawner>().FromInstance(_pumaSpawner).AsSingle().NonLazy();
+			Container.Bind<ExperienceSystem>().FromInstance(_experienceSystem).AsSingle().NonLazy();
 		}
 	}
 }

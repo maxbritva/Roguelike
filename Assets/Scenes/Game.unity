@@ -629,6 +629,64 @@ MonoBehaviour:
   _maxPoint: {fileID: 1497512735}
   _enemyContainer: {fileID: 895932893}
   _enemyPool: {fileID: 607593591}
+--- !u!1 &625966683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 625966684}
+  - component: {fileID: 625966686}
+  - component: {fileID: 625966685}
+  m_Layer: 0
+  m_Name: ExperienceSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &625966684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625966683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1050144438}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &625966685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625966683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08be87b0fd3443db0e7a205aaaf94c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3931006835092653380, guid: 2b3712c7f57b58f40bdb38c7031c4e2b, type: 3}
+--- !u!114 &625966686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625966683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68eb9a080134579bcf8fd9fa1d22b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &632244253
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +947,7 @@ Transform:
   - {fileID: 895932893}
   - {fileID: 2123162774}
   - {fileID: 343191782}
+  - {fileID: 625966684}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1280,7 +1339,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -960809043
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -196789849, guid: 99f10abcf979e904b883da0c6922d74f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1434,8 +1493,7 @@ MonoBehaviour:
   _damageTextSpawner: {fileID: 1396392330}
   _gameTimer: {fileID: 2123162775}
   _levelSystem: {fileID: 2123162776}
-  _slimeSpawner: {fileID: 0}
-  _pumaSpawner: {fileID: 0}
+  _experienceSystem: {fileID: 625966686}
 --- !u!114 &1665187185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1906,7 +1964,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -960809043
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1758587033, guid: e6d508eb98aad2b45bf99b7d8a298c65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
