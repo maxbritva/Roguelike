@@ -6,9 +6,25 @@ using Zenject;
 
 namespace Game.Core.LevelSystem
 {
+	[Serializable]
+	public class Level
+	{
+		[SerializeField] private List<EnemySpawner> _spawners = new List<EnemySpawner>();
+		
+		public void Activate()
+		{
+			for (int i = 0; i < _spawners.Count; i++) 
+				_spawners[i].Activate();
+		}
+		public void Deactivate()
+		{
+			for (int i = 0; i < _spawners.Count; i++) 
+				_spawners[i].Deactivate();
+		}
+	}
 	public class LevelSystem : MonoBehaviour
 	{
-		[SerializeField] private List<LevelInfo> _levels;
+		[SerializeField] private List<Level> _levels;
 		public Action OnLevelChanged;
 		private GameTimer _gameTimer;
 		[Inject] private DiContainer _container;

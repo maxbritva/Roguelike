@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Game.Enemy
 {
-    public abstract class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private float _timeToSpawn;
         [SerializeField] private Transform _minPoint,_maxPoint;

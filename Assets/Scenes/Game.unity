@@ -203,7 +203,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &112696506
 RectTransform:
@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557423017}
   - component: {fileID: 557423019}
-  - component: {fileID: 557423018}
+  - component: {fileID: 557423020}
   m_Layer: 0
   m_Name: Puma
   m_TagString: Untagged
@@ -534,23 +534,6 @@ Transform:
   m_Father: {fileID: 343191782}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &557423018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557423016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c340d2c32ea4692aedc1eb04b7d09c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeToSpawn: 1
-  _minPoint: {fileID: 1977472119}
-  _maxPoint: {fileID: 245682261}
-  _enemyContainer: {fileID: 895932893}
-  _enemyPool: {fileID: 557423019}
 --- !u!114 &557423019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,6 +547,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5464481734028354922, guid: 2bad47291eb6ace439d3d913ac999bfc, type: 3}
+--- !u!114 &557423020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557423016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1455909a972048b198f4aba7875fc0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeToSpawn: 1
+  _minPoint: {fileID: 1977472119}
+  _maxPoint: {fileID: 245682261}
+  _enemyContainer: {fileID: 895932893}
+  _enemyPool: {fileID: 557423019}
 --- !u!1 &607593588
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 607593588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9323f95af614806a1db0e946c722e56, type: 3}
+  m_Script: {fileID: 11500000, guid: 1455909a972048b198f4aba7875fc0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToSpawn: 1
@@ -659,6 +659,7 @@ Transform:
   m_Children:
   - {fileID: 1562071583}
   - {fileID: 350892884}
+  - {fileID: 1694075073}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1433,8 +1434,8 @@ MonoBehaviour:
   _damageTextSpawner: {fileID: 1396392330}
   _gameTimer: {fileID: 2123162775}
   _levelSystem: {fileID: 2123162776}
-  _slimeSpawner: {fileID: 607593592}
-  _pumaSpawner: {fileID: 557423018}
+  _slimeSpawner: {fileID: 0}
+  _pumaSpawner: {fileID: 0}
 --- !u!114 &1665187185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1542,13 +1543,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694075070}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 632244254}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1775992458
 GameObject:
@@ -1839,9 +1840,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levels:
-  - {fileID: 11400000, guid: 40e99b1c36c8ad0449b5d7061767f6e9, type: 2}
-  - {fileID: 11400000, guid: b5b277c0864be5c40aba3ac3656e42bc, type: 2}
-  - {fileID: 11400000, guid: e4fb3744c71f8804fa6bc104ce42c173, type: 2}
+  - _spawners:
+    - {fileID: 607593592}
+  - _spawners:
+    - {fileID: 557423020}
+  - _spawners:
+    - {fileID: 607593592}
+    - {fileID: 557423020}
 --- !u!1 &690860644994725157
 GameObject:
   m_ObjectHideFlags: 0
