@@ -2,6 +2,7 @@
 using Game.Core.LevelSystem;
 using Game.FX.DamageText;
 using Game.Player;
+using Game.Player.Weapons.Throw;
 using UnityEngine;
 using Zenject;
 
@@ -16,6 +17,7 @@ namespace DI
 		[SerializeField] private LevelSystem _levelSystem;
 		[SerializeField] private ExperienceSystem _experienceSystem;
 		[SerializeField] private ExperienceSpawner _experienceSpawner;
+		[SerializeField] private ThrowWeapon _throwWeapon;
 
 		public override void InstallBindings()
 		{
@@ -26,6 +28,7 @@ namespace DI
 			Container.Bind<LevelSystem>().FromInstance(_levelSystem).AsSingle().NonLazy();
 			Container.Bind<ExperienceSystem>().FromInstance(_experienceSystem).AsSingle().NonLazy();
 			Container.Bind<ExperienceSpawner>().FromInstance(_experienceSpawner).AsSingle().NonLazy();
+			Container.Bind<ThrowWeapon>().FromInstance(_throwWeapon).AsSingle().NonLazy();
 		}
 	}
 }

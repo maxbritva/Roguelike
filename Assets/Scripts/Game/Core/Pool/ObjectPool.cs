@@ -10,8 +10,6 @@ namespace Game.Core.Pool
 		private List<GameObject> _objectsPool = new List<GameObject>();
 		[Inject] private DiContainer _container;
 
-		private void Awake() => Create();
-
 		private void SetActiveObject(GameObject objectToRelease, bool value) => objectToRelease.gameObject.SetActive(value);
 
 		public GameObject GetFromPool()
@@ -30,8 +28,6 @@ namespace Game.Core.Pool
 		public GameObject Create()
 		{
 			GameObject newObject = _container.InstantiatePrefab(_prefab);
-			// GameObject newObject = Object.Instantiate(_prefab);
-			// _container.InjectGameObject(newObject);              
 			SetActiveObject(newObject, false);
 			_objectsPool.Add(newObject);
 			return newObject;

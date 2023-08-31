@@ -19,7 +19,8 @@ namespace Game.Player.Weapons
 		private int _maxLevel = 8;
 		public List<WeaponStats> WeaponStats => _weaponStats;
 		public int CurrentLevel => _currentLevel;
-		
+		public float Damage => _damage;
+
 
 		protected virtual void OnTriggerEnter2D(Collider2D col)
 		{

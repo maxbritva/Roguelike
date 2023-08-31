@@ -1,5 +1,4 @@
-﻿using Game.Core;
-using Game.Core.Interfaces;
+﻿using Game.Core.Interfaces;
 using UnityEngine;
 
 namespace Game.Player
@@ -9,7 +8,8 @@ namespace Game.Player
 		[SerializeField] private float _moveSpeed;
 		[SerializeField] private Animator _playerAnimator;
 		private Vector3 _movement;
-		
+		public Vector3 Movement => _movement;
+
 		private void Update() => Move();
 
 		public void Move()
