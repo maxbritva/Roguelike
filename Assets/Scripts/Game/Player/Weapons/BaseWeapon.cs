@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Game.Enemy;
 using Game.FX.DamageText;
 using UnityEngine;
@@ -9,11 +10,14 @@ namespace Game.Player.Weapons
 {
 	public abstract class BaseWeapon : MonoBehaviour
 	{
-		[SerializeField] private WeaponStats _weaponStats = new WeaponStats();
+		[SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
 		[SerializeField] private float _damage;
 		private DiContainer _container;
 		private DamageTextSpawner _damageTextSpawner;
-		public WeaponStats WeaponStats => _weaponStats;
+		private int _currentLevel = 1;
+		private int _maxLevel = 8;
+		public List<WeaponStats> WeaponStats => _weaponStats;
+		public int CurrentLevel => _currentLevel;
 
 		private void OnTriggerEnter2D(Collider2D col)
 		{
@@ -29,14 +33,20 @@ namespace Game.Player.Weapons
 		}
 		private void Awake() => _container.Inject(this);
 
-		private void Start() => SetStats();
+		private void Start() => SetStats(0);
 
 		[Inject] private void Construct(DamageTextSpawner damageTextSpawner, DiContainer container)
 		{
 			_damageTextSpawner = damageTextSpawner;
 			_container = container;
 		}
+		protected virtual void SetStats(int value) => _damage = _weaponStats[value].Damage;
 
-		protected virtual void SetStats() => _damage = _weaponStats.Damage;
+		protected virtual void LevelUp()
+		{
+			if (_currentLevel < _maxLevel)
+				_currentLevel++;
+			SetStats(_currentLevel-1);
+		}
 	}
 }
