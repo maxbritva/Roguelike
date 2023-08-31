@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Core.Interfaces;
 using Game.Enemy;
 using Game.FX.DamageText;
 using UnityEngine;
@@ -11,23 +12,22 @@ namespace Game.Player.Weapons
 	public abstract class BaseWeapon : MonoBehaviour
 	{
 		[SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
-		[SerializeField] private float _damage;
+		[SerializeField] protected float _damage;
 		private DiContainer _container;
-		private DamageTextSpawner _damageTextSpawner;
+		protected DamageTextSpawner _damageTextSpawner;
 		private int _currentLevel = 1;
 		private int _maxLevel = 8;
 		public List<WeaponStats> WeaponStats => _weaponStats;
 		public int CurrentLevel => _currentLevel;
+		
 
-		private void OnTriggerEnter2D(Collider2D col)
+		protected virtual void OnTriggerEnter2D(Collider2D col)
 		{
 			if (col.gameObject.TryGetComponent(out EnemyHealth health));
 			{
-				if(health == null)
-					return;
+				if(health == null) return;
 				float damage = Random.Range(_damage / 2f, _damage * 1.5f);
 				health.TakeDamage(damage);
-				health.gameObject.SetActive(false);
 				_damageTextSpawner.Activate(transform,(int)damage);
 			}
 		}

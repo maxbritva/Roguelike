@@ -12,6 +12,7 @@ namespace Game.Enemy
 		{
 			base.TakeDamage(damage);
 			if (CurrentHealth < 0 == false) return;
+			gameObject.SetActive(false);
 			if(Random.Range(1f,100f) <=30)
 				_experienceSpawner.Spawn(transform.position);
 		}
