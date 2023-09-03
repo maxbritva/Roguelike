@@ -2,7 +2,8 @@
 using Game.Core.LevelSystem;
 using Game.FX.DamageText;
 using Game.Player;
-using Game.Player.Weapons.Throw;
+using Game.Player.Weapons.Bow;
+using Game.Player.Weapons.Shuriken;
 using UnityEngine;
 using Zenject;
 
@@ -17,18 +18,25 @@ namespace DI
 		[SerializeField] private LevelSystem _levelSystem;
 		[SerializeField] private ExperienceSystem _experienceSystem;
 		[SerializeField] private ExperienceSpawner _experienceSpawner;
-		[SerializeField] private ThrowWeapon _throwWeapon;
+		[SerializeField] private Bow _bow;
+		[SerializeField] private ShurikenWeapon _shurikenWeapon;
 
 		public override void InstallBindings()
 		{
-			Container.Bind<PlayerController>().FromInstance(_playerController).AsSingle().NonLazy();
-			Container.Bind<PlayerHealth>().FromInstance(_playerHealth).AsSingle().NonLazy();
+			PlayerBinds();
 			Container.Bind<DamageTextSpawner>().FromInstance(_damageTextSpawner).AsSingle().NonLazy();
 			Container.Bind<GameTimer>().FromInstance(_gameTimer).AsSingle().NonLazy();
 			Container.Bind<LevelSystem>().FromInstance(_levelSystem).AsSingle().NonLazy();
 			Container.Bind<ExperienceSystem>().FromInstance(_experienceSystem).AsSingle().NonLazy();
 			Container.Bind<ExperienceSpawner>().FromInstance(_experienceSpawner).AsSingle().NonLazy();
-			Container.Bind<ThrowWeapon>().FromInstance(_throwWeapon).AsSingle().NonLazy();
+		}
+
+		private void PlayerBinds()
+		{
+			Container.Bind<PlayerController>().FromInstance(_playerController).AsSingle().NonLazy();
+			Container.Bind<PlayerHealth>().FromInstance(_playerHealth).AsSingle().NonLazy();
+			Container.Bind<Bow>().FromInstance(_bow).AsSingle().NonLazy();
+			Container.Bind<ShurikenWeapon>().FromInstance(_shurikenWeapon).AsSingle().NonLazy();
 		}
 	}
 }

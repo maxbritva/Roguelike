@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5742799550036501997}
   - component: {fileID: 6077239123011497666}
   - component: {fileID: 8322928733815827743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyPuma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 9181242209089720307}
   - component: {fileID: 1644958818090363390}
   - component: {fileID: 6628665338155707622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
