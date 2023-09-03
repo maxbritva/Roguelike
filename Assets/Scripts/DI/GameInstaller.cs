@@ -3,6 +3,7 @@ using Game.Core.LevelSystem;
 using Game.FX.DamageText;
 using Game.Player;
 using Game.Player.Weapons.Bow;
+using Game.Player.Weapons.FrozenFire;
 using Game.Player.Weapons.Shuriken;
 using UnityEngine;
 using Zenject;
@@ -20,6 +21,7 @@ namespace DI
 		[SerializeField] private ExperienceSpawner _experienceSpawner;
 		[SerializeField] private Bow _bow;
 		[SerializeField] private ShurikenWeapon _shurikenWeapon;
+		[SerializeField] private FrozenFire _frozenFire;
 
 		public override void InstallBindings()
 		{
@@ -37,6 +39,7 @@ namespace DI
 			Container.Bind<PlayerHealth>().FromInstance(_playerHealth).AsSingle().NonLazy();
 			Container.Bind<Bow>().FromInstance(_bow).AsSingle().NonLazy();
 			Container.Bind<ShurikenWeapon>().FromInstance(_shurikenWeapon).AsSingle().NonLazy();
+			Container.Bind<FrozenFire>().FromInstance(_frozenFire).AsSingle().NonLazy();
 		}
 	}
 }

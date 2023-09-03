@@ -8,13 +8,13 @@ namespace Game.Player.Weapons
 {
 	public abstract class Throw : MonoBehaviour
 	{
-		private DamageTextSpawner _damageTextSpawner;
+		protected DamageTextSpawner _damageTextSpawner;
 		protected WaitForSeconds Timer;
 		protected float Damage;
 
 		protected virtual void OnEnable() => StartCoroutine(TimerToHide());
 
-		private void OnTriggerEnter2D(Collider2D col)
+		protected virtual void OnTriggerEnter2D(Collider2D col)
 		{
 			if (col.gameObject.TryGetComponent(out EnemyHealth health));
 			{

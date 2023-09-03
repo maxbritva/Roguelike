@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 1.5
   _animator: {fileID: 6628665338155707622}
+  _freezeTimer: 1
 --- !u!114 &6077239123011497666
 MonoBehaviour:
   m_ObjectHideFlags: 0
