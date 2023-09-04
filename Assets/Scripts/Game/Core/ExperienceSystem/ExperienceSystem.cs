@@ -7,6 +7,7 @@ namespace Game.Core.ExperienceSystem
 	public class ExperienceSystem : MonoBehaviour
 	{
 		public Action<int> OnExperiencePickedUp;
+		[SerializeField] private GameObject _upgradeWindow;
 		private int _currentExperience;
 		private int _experienceToLevelUp = 5;
 		private int _currentLevel = 1;
@@ -33,6 +34,7 @@ namespace Game.Core.ExperienceSystem
 		{
 			_currentExperience = 0;
 			_currentLevel++;
+			_upgradeWindow.SetActive(true);
 			switch (_currentLevel)
 			{
 				case <= 20:

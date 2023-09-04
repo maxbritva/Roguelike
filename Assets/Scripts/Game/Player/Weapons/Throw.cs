@@ -21,7 +21,7 @@ namespace Game.Player.Weapons
 				if(health == null) return;
 				float damage = Random.Range(Damage / 1.5f, Damage * 1.8f);
 				health.TakeDamage(damage);
-				_damageTextSpawner.Activate(transform,(int)damage);
+				//_damageTextSpawner.Activate(transform,(int)damage);
 			}
 		}
 		[Inject] private void Construct(DamageTextSpawner damageTextSpawner) => _damageTextSpawner = damageTextSpawner;

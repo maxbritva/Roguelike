@@ -51,7 +51,6 @@ namespace Game.Player.Weapons.FrozenFire
 				}
 				yield return _timeBetweenAttack;
 			}
-		
-	}
+		}
 	}
 }
