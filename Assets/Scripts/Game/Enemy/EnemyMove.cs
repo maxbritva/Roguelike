@@ -33,7 +33,12 @@ namespace Game.Enemy
 			transform.position += _movement * (_moveSpeed * Time.deltaTime);
 			CheckDistanceToHide();
 		}
-		public void Freeze() => StartCoroutine(StartFreeze());
+		public void Freeze()
+		{
+			if(gameObject.activeSelf)
+				StartCoroutine(StartFreeze());
+		}
+
 		private void CheckDistanceToHide()
 		{
 			float distance = Vector3.Distance(transform.position, _playerController.gameObject.transform.position);

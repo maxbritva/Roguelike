@@ -9,7 +9,6 @@ namespace Game.Player.Weapons
     {
         [SerializeField] private float _range;
         [SerializeField] private Transform _targetContainer;
-        [SerializeField] private CircleCollider2D _targetCollider2D;
         private List<EnemyHealth> _enemiesInZone = new List<EnemyHealth>();
         private Coroutine _attackRoutine;
         private WaitForSeconds _timeBetweenAttack;
@@ -45,7 +44,6 @@ namespace Game.Player.Weapons
             _timeBetweenAttack = new WaitForSeconds(WeaponStats[CurrentLevel-1].TimeBetweenAttack);
             _range = WeaponStats[CurrentLevel-1].Range;
             _targetContainer.transform.localScale = Vector3.one * _range;
-            _targetCollider2D.radius = _range;
         }
         
 
