@@ -3,6 +3,7 @@ using Game.Core.ExperienceSystem;
 using Game.Core.LevelSystem;
 using Game.Core.Loot;
 using Game.Core.Upgrades;
+using Game.FX.CountUpAnimator;
 using Game.FX.DamageText;
 using Game.Player;
 using Game.UI;
@@ -24,6 +25,7 @@ namespace DI
 		[SerializeField] private LootSpawner _lootSpawner;
 		[SerializeField] private RandomSpawnPoint _randomSpawnPoint;
 		[SerializeField] private CoinsUpdater _coinsUpdater;
+		[SerializeField] private CountUp _countUp;
 
 		public override void InstallBindings()
 		{
@@ -38,6 +40,7 @@ namespace DI
 			Container.Bind<LootSpawner>().FromInstance(_lootSpawner).AsSingle().NonLazy();
 			Container.Bind<RandomSpawnPoint>().FromInstance(_randomSpawnPoint).AsSingle().NonLazy();
 			Container.Bind<CoinsUpdater>().FromInstance(_coinsUpdater).AsSingle().NonLazy();
+			Container.Bind<CountUp>().FromInstance(_countUp).AsSingle().NonLazy();
 		}
 		
 	}

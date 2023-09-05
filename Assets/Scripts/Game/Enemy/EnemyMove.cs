@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Game.Core.Interfaces;
 using Game.Player;
 using UnityEngine;
@@ -38,6 +37,7 @@ namespace Game.Enemy
 			if(gameObject.activeSelf)
 				StartCoroutine(StartFreeze());
 		}
+		public void StopEnemy(bool value) => _moveSpeed = value ? 0f : _moveSpeedInitial;
 
 		private void CheckDistanceToHide()
 		{
