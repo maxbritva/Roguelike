@@ -51,11 +51,8 @@ namespace Game.Player.Weapons
         {
             while (true)
             {
-                for (int i = 0; i < _enemiesInZone.Count; i++)
-                {
+                for (int i = 0; i < _enemiesInZone.Count; i++) 
                     _enemiesInZone[i].TakeDamage(_damage);
-                    _damageTextSpawner.Activate(transform,(int)_damage);
-                }
                 yield return _timeBetweenAttack;
             }
         }

@@ -115,7 +115,7 @@ namespace Game.Player.Weapons
 			_interval = _isActivePhase ? _duration : _timeBetweenAttack;
 		}
 
-		protected override void LevelUp()
+		public override void LevelUp()
 		{
 			base.LevelUp();
 			if (CurrentLevel != 4) return;

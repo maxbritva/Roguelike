@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Core.Interfaces;
+﻿using System.Collections.Generic;
 using Game.Enemy;
 using Game.FX.DamageText;
 using UnityEngine;
@@ -29,7 +27,7 @@ namespace Game.Player.Weapons
 				if(health == null) return;
 				float damage = Random.Range(_damage / 2f, _damage * 1.5f);
 				health.TakeDamage(damage);
-				_damageTextSpawner.Activate(transform,(int)damage);
+				
 			}
 		}
 		private void Awake() => _container.Inject(this);
@@ -43,7 +41,7 @@ namespace Game.Player.Weapons
 		}
 		protected virtual void SetStats(int value) => _damage = _weaponStats[value].Damage;
 
-		protected virtual void LevelUp()
+		public virtual void LevelUp()
 		{
 			if (_currentLevel < _maxLevel)
 				_currentLevel++;

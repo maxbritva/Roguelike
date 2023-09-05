@@ -1,9 +1,9 @@
 ﻿using System.Collections;
+using Game.Core;
 using Game.Core.Pool;
 using Game.Player;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Game.Enemy
 {
@@ -14,6 +14,7 @@ namespace Game.Enemy
         [SerializeField] private Transform _enemyContainer;
         [SerializeField] private ObjectPool _enemyPool;
         private PlayerController _playerController;
+        private RandomSpawnPoint _randomSpawnPoint;
         private WaitForSeconds _interval;
         private Coroutine _spawnCoroutine;
 
@@ -22,7 +23,11 @@ namespace Game.Enemy
         public void Activate() => _spawnCoroutine = StartCoroutine(Spawn());
         public void Deactivate() => StopCoroutine(_spawnCoroutine);
 
-        [Inject] private void Construct(PlayerController playerController) => _playerController = playerController;
+        [Inject] private void Construct(PlayerController playerController, RandomSpawnPoint randomSpawnPoint)
+        {
+            _playerController = playerController;
+            _randomSpawnPoint = randomSpawnPoint;
+        }
 
         private IEnumerator Spawn()
         {
@@ -31,26 +36,9 @@ namespace Game.Enemy
                 transform.position = _playerController.transform.position;
                 GameObject newEnemy = _enemyPool.GetFromPool();
                 newEnemy.transform.SetParent(_enemyContainer);
-                newEnemy.transform.position = GetRandomSpawnPoint();
+                newEnemy.transform.position = _randomSpawnPoint.GetRandomSpawnPoint(_minPoint, _maxPoint);
                 yield return _interval;
             }
-        }
-
-        private Vector3 GetRandomSpawnPoint()
-        {
-            Vector3 spawnPoint = Vector3.zero;
-            bool verticalSpawn = Random.Range(0f,1f) > 0.5f;
-            if (verticalSpawn)
-            {
-                spawnPoint.y = Random.Range(_minPoint.position.y,_maxPoint.position.y);
-                spawnPoint.x = Random.Range(0f, 1f) > 0.5f ? _minPoint.position.x : _maxPoint.position.x;
-            }
-            else
-            {
-                spawnPoint.x = Random.Range(_minPoint.position.x,_maxPoint.position.x);
-                spawnPoint.y = Random.Range(0f, 1f) > 0.5f ? _minPoint.position.y : _maxPoint.position.y;
-            }
-            return spawnPoint;
         }
     }
 }

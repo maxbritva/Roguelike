@@ -13,6 +13,7 @@ namespace Game.Player
 		public Vector3 Movement => _movement;
 
 		private void Update() => Move();
+		public void UpgradeSpeed() => _moveSpeed += 0.3f;
 
 		public void Move()
 		{

@@ -22,7 +22,6 @@ namespace Game.Player.Weapons.FrozenFire
 			{
 				if(health == null) return;
 				health.TakeDamage(Damage);
-				_damageTextSpawner.Activate(transform,(int)Damage);
 				health.GetComponent<EnemyMove>().Freeze();
 			}
 			if (_frozenFire.CurrentLevel <= 4) 

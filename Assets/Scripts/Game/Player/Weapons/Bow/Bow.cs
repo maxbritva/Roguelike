@@ -62,7 +62,6 @@ namespace Game.Player.Weapons.Bow
 					_animator.SetTrigger("Idle");
 				}
 				yield return _timeBetweenAttack;
-				
 			}
 		}
 	}
