@@ -21,7 +21,7 @@ namespace Game.Player
 		public void AddCoins() => Coins++;
 		public void AddRewardCoins(int value)
 		{
-			if(value <=0)
+			if(value <0)
 				throw new ArgumentOutOfRangeException(nameof(value));
 			Coins += value;
 		}

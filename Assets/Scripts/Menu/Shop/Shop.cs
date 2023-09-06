@@ -1,4 +1,5 @@
 ﻿using Game.Player;
+using Menu.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,17 +9,20 @@ namespace Menu.Shop
 {
 	public class Shop : MonoBehaviour
 	{
+		[Header("Cost texts")]
 		[SerializeField] private TextMeshProUGUI _maxHealthCostText;
 		[SerializeField] private TextMeshProUGUI _speedCostText;
 		[SerializeField] private TextMeshProUGUI _regenCostText;
 		[SerializeField] private TextMeshProUGUI _rangeExpCostText;
-
-		[SerializeField] private Button _damageButton;
+		[Header("Upgrade buttons")]
+		[SerializeField] private Button _maxHealthButton;
 		[SerializeField] private Button _speedButton;
+		[SerializeField] private Button _regenButton;
+		[SerializeField] private Button _rangeExpButton;
 		private UpgradeLoader _upgradeLoader;
 		private PlayerData _playerData;
-		//private MenuUIUpdater _menuUIUpdater;
-		//private SaveSystem _saveSystem;
+		private MenuUIUpdater _menuUIUpdater;
+		private SaveProgress _saveSystem;
 
 		private void OnEnable()
 		{
@@ -32,7 +36,7 @@ namespace Menu.Shop
 			_speedCostText.text = "Cost: " + _upgradeLoader.SpeedCurrentLevel.Cost;
 			_regenCostText.text = "Cost: " + _upgradeLoader.RegenCurrentLevel.Cost;
 			_rangeExpCostText.text = "Cost: " + _upgradeLoader.RangeExpCurrentLevel.Cost;
-			//_menuUIUpdater.UpdateUpgradeWindowCoins();
+			_menuUIUpdater.UpdateUI();
 		}
 		
 		public void TryUpgrade(int id)
@@ -41,9 +45,9 @@ namespace Menu.Shop
 			{
 				case 1:
 				{
-					SpendCredits(_upgradeLoader.DamageCurrentLevel);
-					if (_playerData.DamageUpgradeIndex < 5) 
-						_playerData.DamageUpgrade();
+					SpendCoins(_upgradeLoader.MaxHealthCurrentLevel);
+					if (_playerData.MaxHealthUpgradeIndex < 5) 
+						_playerData.SetUpgradeIndex(_playerData.MaxHealthUpgradeIndex + 1,1);
 					CheckAvailableButtons();
 					ShowPrice();
 					_upgradeLoader.LoadCurrentLevels();
@@ -51,35 +55,57 @@ namespace Menu.Shop
 				}
 				case 2:
 				{
-					SpendCredits(_upgradeLoader.SpeedCurrentLevel);
+					SpendCoins(_upgradeLoader.SpeedCurrentLevel);
 					if (_playerData.SpeedUpgradeIndex < 5) 
-						_playerData.SpeedUpgrade();
+						_playerData.SetUpgradeIndex(_playerData.SpeedUpgradeIndex + 1,2);
 					CheckAvailableButtons();
 					ShowPrice();
 					_upgradeLoader.LoadCurrentLevels();
 					break;
 				}
+				case 3:
+				{
+					SpendCoins(_upgradeLoader.RegenCurrentLevel);
+					if (_playerData.RegenUpgradeIndex < 5) 
+						_playerData.SetUpgradeIndex(_playerData.RegenUpgradeIndex + 1,2);
+					CheckAvailableButtons();
+					ShowPrice();
+					_upgradeLoader.LoadCurrentLevels();
+					break;
+				}	
+				case 4:
+				{
+					SpendCoins(_upgradeLoader.RangeExpCurrentLevel);
+					if (_playerData.RangeExpUpgradeIndex < 5) 
+						_playerData.SetUpgradeIndex(_playerData.RangeExpUpgradeIndex + 1,2);
+					CheckAvailableButtons();
+					ShowPrice();
+					_upgradeLoader.LoadCurrentLevels();
+					break;
+				}	
 			}
 		}
 		
-		private void SpendCredits(ItemShop target) {
-			if (_playerData.Coins >= target.Cost)
-				_playerData.AddSpendCoins(-target.Cost);
+		private void SpendCoins(ItemShop target) {
+			_playerData.TrySpendCoins(-target.Cost);
 			_saveSystem.SaveData();
+			_menuUIUpdater.UpdateUI();
 		}
 		
-		[Inject] private void Construct(UpgradeLoader upgradeLoader, PlayerData playerData, MenuUIUpdater menuUIUpdater, SaveSystem saveSystem)
+		[Inject] private void Construct(UpgradeLoader loader, PlayerData data, SaveProgress save, MenuUIUpdater UIUpdater)
 		{
-			_upgradeLoader = upgradeLoader;
-			_playerData = playerData;
-			_menuUIUpdater = menuUIUpdater;
-			_saveSystem = saveSystem;
+			_upgradeLoader = loader;
+			_playerData = data;
+			_menuUIUpdater = UIUpdater;
+			_saveSystem = save;
 		}
 
 		private void CheckAvailableButtons()
 		{
-			_damageButton.interactable = _playerData.Coins >= _upgradeLoader.DamageCurrentLevel.Cost && _playerData.DamageUpgradeIndex < 5;
+			_maxHealthButton.interactable = _playerData.Coins >= _upgradeLoader.MaxHealthCurrentLevel.Cost && _playerData.MaxHealthUpgradeIndex < 5;
 			_speedButton.interactable = _playerData.Coins >= _upgradeLoader.SpeedCurrentLevel.Cost && _playerData.SpeedUpgradeIndex < 5;
+			_regenButton.interactable = _playerData.Coins >= _upgradeLoader.RegenCurrentLevel.Cost && _playerData.RegenUpgradeIndex < 5;
+			_rangeExpButton.interactable = _playerData.Coins >= _upgradeLoader.RangeExpCurrentLevel.Cost && _playerData.RangeExpUpgradeIndex < 5;
 		}
 	}
 }

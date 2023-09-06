@@ -37,6 +37,7 @@ namespace Game.Core.Loot
 		{
 			while (true)
 			{
+				yield return _interval;
 				transform.position = _playerController.transform.position;
 				GameObject newLootBox = _lootBoxPool.GetFromPool();
 				newLootBox.transform.SetParent(_lootBoxContainer);

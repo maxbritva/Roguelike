@@ -7,7 +7,6 @@ namespace Menu.Shop
 	{
 		[SerializeField] private float _value;
 		[SerializeField] private int _cost;
-
 		public float Value => _value;
 		public int Cost => _cost;
 	}

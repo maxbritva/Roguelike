@@ -7,6 +7,7 @@ using Game.FX.CountUpAnimator;
 using Game.FX.DamageText;
 using Game.Player;
 using Game.UI;
+using Menu;
 using UnityEngine;
 using Zenject;
 
@@ -28,6 +29,8 @@ namespace DI
 		[SerializeField] private LootBoxSpawner _lootBoxSpawner;
 		[SerializeField] private RandomSpawnPoint _randomSpawnPoint;
 		[SerializeField] private TreasureWindow _treasureWindow;
+		[SerializeField] private EndGameWindow _endGameWindow;
+		[SerializeField] private SaveProgress _saveProgress;
 
 		public override void InstallBindings()
 		{
@@ -45,6 +48,8 @@ namespace DI
 			Container.Bind<CountUp>().FromInstance(_countUp).AsSingle().NonLazy();
 			Container.Bind<LootBoxSpawner>().FromInstance(_lootBoxSpawner).AsSingle().NonLazy();
 			Container.Bind<TreasureWindow>().FromInstance(_treasureWindow).AsSingle().NonLazy();
+			Container.Bind<SaveProgress>().FromInstance(_saveProgress).AsSingle().NonLazy();
+			Container.Bind<EndGameWindow>().FromInstance(_endGameWindow).AsSingle().NonLazy();
 		}
 		
 	}
