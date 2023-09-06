@@ -9,7 +9,6 @@ namespace Game.Core.Loot
 	public class LootBoxSpawner : MonoBehaviour
 	{
 		[SerializeField] private ObjectPool _lootBoxPool;
-		
 		[SerializeField] private float _timeToSpawn;
 		[SerializeField] private Transform _minPoint,_maxPoint;
 		[SerializeField] private Transform _lootBoxContainer;
@@ -22,7 +21,11 @@ namespace Game.Core.Loot
 		private void Start() => _interval = new WaitForSeconds(_timeToSpawn);
 
 		public void Activate() => _spawnCoroutine = StartCoroutine(Spawn());
-		public void Deactivate() => StopCoroutine(_spawnCoroutine);
+		public void Deactivate()
+		{
+			if(_spawnCoroutine !=null)
+				StopCoroutine(_spawnCoroutine);
+		}
 
 		[Inject] private void Construct(PlayerController playerController, RandomSpawnPoint randomSpawnPoint)
 		{
@@ -38,8 +41,6 @@ namespace Game.Core.Loot
 				GameObject newLootBox = _lootBoxPool.GetFromPool();
 				newLootBox.transform.SetParent(_lootBoxContainer);
 				newLootBox.transform.position = _randomSpawnPoint.GetRandomSpawnPoint(_minPoint, _maxPoint);
-				newLootBox.transform.position = new Vector3(Mathf.Clamp(transform.position.x, -120f, 120f),
-					Mathf.Clamp(transform.position.y, -60f, 60f), transform.position.z);
 				yield return _interval;
 			}
 		}

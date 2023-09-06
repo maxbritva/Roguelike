@@ -21,7 +21,11 @@ namespace Game.Enemy
         private void Start() => _interval = new WaitForSeconds(_timeToSpawn);
 
         public void Activate() => _spawnCoroutine = StartCoroutine(Spawn());
-        public void Deactivate() => StopCoroutine(_spawnCoroutine);
+        public void Deactivate()
+        {
+            if(_spawnCoroutine !=null)
+                StopCoroutine(_spawnCoroutine);
+        }
 
         [Inject] private void Construct(PlayerController playerController, RandomSpawnPoint randomSpawnPoint)
         {

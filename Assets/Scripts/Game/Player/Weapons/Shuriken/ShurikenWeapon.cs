@@ -13,8 +13,8 @@ namespace Game.Player.Weapons.Shuriken
 		private Coroutine _attackRoutine;
 		private float _duration;
 		private float _speed;
-		private float _range; //
-		private Vector3 _direction; //
+		private float _range; 
+		private Vector3 _direction; 
 		public float Duration => _duration;
 		public float Speed => _speed;
 		public Vector3 Direction => _direction;

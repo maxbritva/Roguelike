@@ -15,17 +15,19 @@ namespace DI
 	public class GameInstaller : MonoInstaller
 	{
 		[SerializeField] private DamageTextSpawner _damageTextSpawner;
+		[SerializeField] private UpgradeWindow _upgradeWindow;
+		[SerializeField] private GamePause _gamePause;
+		[SerializeField] private CoinsUpdater _coinsUpdater;
+		[SerializeField] private GameTimer _gameTimer;
+		[SerializeField] private CountUp _countUp;
 		[SerializeField] private ExperienceSpawner _experienceSpawner;
 		[SerializeField] private ExperienceSystem _experienceSystem;
-		[SerializeField] private UpgradeWindow _upgradeWindow;
 		[SerializeField] private PlayerUpgrade _playerUpgrade;
 		[SerializeField] private LevelSystem _levelSystem;
-		[SerializeField] private GameTimer _gameTimer;
-		[SerializeField] private GamePause _gamePause;
 		[SerializeField] private LootSpawner _lootSpawner;
+		[SerializeField] private LootBoxSpawner _lootBoxSpawner;
 		[SerializeField] private RandomSpawnPoint _randomSpawnPoint;
-		[SerializeField] private CoinsUpdater _coinsUpdater;
-		[SerializeField] private CountUp _countUp;
+		[SerializeField] private TreasureWindow _treasureWindow;
 
 		public override void InstallBindings()
 		{
@@ -41,6 +43,8 @@ namespace DI
 			Container.Bind<RandomSpawnPoint>().FromInstance(_randomSpawnPoint).AsSingle().NonLazy();
 			Container.Bind<CoinsUpdater>().FromInstance(_coinsUpdater).AsSingle().NonLazy();
 			Container.Bind<CountUp>().FromInstance(_countUp).AsSingle().NonLazy();
+			Container.Bind<LootBoxSpawner>().FromInstance(_lootBoxSpawner).AsSingle().NonLazy();
+			Container.Bind<TreasureWindow>().FromInstance(_treasureWindow).AsSingle().NonLazy();
 		}
 		
 	}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -22,13 +23,15 @@ namespace Game.FX.CountUpAnimator
                 yield return _tick;
             }
         }
-        
+
+        public void Initialize(float targetValue, float currentValue, TextMeshProUGUI targetText) => StartCoroutine(Activate(targetValue, currentValue, targetText));
+
         public IEnumerator Activate(float targetValue, float currentValue, TextMeshProUGUI targetText) {
             StartCoroutine(SoundScore());
-            float rate = Mathf.Abs(targetValue - currentValue) / AnimationDuration;
-            while (currentValue != targetValue) {
+           float rate = Mathf.Abs(targetValue - currentValue) / AnimationDuration;
+            while (Math.Abs(currentValue - targetValue) > 0.1f) {
                 currentValue = Mathf.MoveTowards(currentValue, targetValue, rate * Time.deltaTime);
-                targetText.text = ((int)currentValue).ToString();
+                targetText.text = Mathf.FloorToInt(currentValue).ToString();
                 yield return null;
             }
         }

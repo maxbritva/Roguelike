@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Core;
 using Game.Core.Interfaces;
 using Game.Player;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Game.Enemy
 		[SerializeField] private Animator _animator;
 		[SerializeField] private float _freezeTimer;
 		private PlayerController _playerController;
+		private GamePause _gamePause;
 		private Vector3 _movement;
 		private float _moveSpeedInitial;
 		private WaitForSeconds _timer;
@@ -22,9 +24,15 @@ namespace Game.Enemy
 			_timer = new WaitForSeconds(_freezeTimer);
 		}
 
-		[Inject] private void Construct(PlayerController playerController) => _playerController = playerController;
+		[Inject] private void Construct(PlayerController playerController, GamePause pause)
+		{
+			_playerController = playerController;
+			_gamePause = pause;
+		}
+
 		public void Move()
 		{
+			_moveSpeed = _gamePause.IsStopped ? 0f : _moveSpeedInitial;
 			_movement = (_playerController.gameObject.transform.position -
 			            transform.position).normalized;
 			_animator.SetFloat("Horizontal", _movement.x);

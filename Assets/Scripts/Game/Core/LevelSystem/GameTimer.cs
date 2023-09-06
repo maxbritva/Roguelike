@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -15,10 +16,15 @@ namespace Game.Core.LevelSystem
 		private int _minutes;
 		public int Minutes => _minutes;
 
-		private void Start() => Activate();
+		private void Awake() => Activate();
+
 		public void Activate() => _timeRoutine = StartCoroutine(Timer());
 
-		public void Deactivate() => StopCoroutine(_timeRoutine);
+		public void Deactivate()
+		{
+			if(_timeRoutine != null)
+				StopCoroutine(_timeRoutine);
+		}
 
 		[Inject] private void Construct(LevelSystem levelSystem) => _levelSystem = levelSystem;
 

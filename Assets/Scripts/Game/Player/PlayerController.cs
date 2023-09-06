@@ -1,15 +1,17 @@
 ﻿using System;
+using Game.Core;
 using Game.Core.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Player
 {
 	public class PlayerController : MonoBehaviour, IMovable
 	{
-		[SerializeField] private Rigidbody2D _playerRigidbody2D;
 		[SerializeField] private Animator _playerAnimator;
 		[SerializeField] private float _moveSpeed;
 		private Vector3 _movement;
+		private GamePause _gamePause;
 		public Vector3 Movement => _movement;
 
 		private void Update() => Move();
@@ -17,13 +19,13 @@ namespace Game.Player
 
 		public void Move()
 		{
-			_movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-			if (Input.GetKeyDown(KeyCode.Space))
-				_playerRigidbody2D.AddForce(_movement * (4000f * Time.deltaTime), ForceMode2D.Impulse);
+			_movement = _gamePause.IsStopped == false ? new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) : Vector3.zero;
 			_playerAnimator.SetFloat("Horizontal", _movement.x);
 			_playerAnimator.SetFloat("Vertical", _movement.y);
 			_playerAnimator.SetFloat("Speed", _movement.sqrMagnitude);
 			transform.position += _movement.normalized * (_moveSpeed * Time.deltaTime);
 		}
+		
+		[Inject] private void Construct(GamePause pause) => _gamePause = pause;
 	}
 }

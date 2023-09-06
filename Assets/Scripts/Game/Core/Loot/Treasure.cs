@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using Game.UI;
+using Zenject;
 
 namespace Game.Core.Loot
 {
 	public class Treasure : Loot
 	{
-		//private PlayerHealth _playerHealth;
+		private TreasureWindow _treasureWindow;
 
 		protected override void Pickup()
 		{
 			base.Pickup();
-			
+			_treasureWindow.gameObject.SetActive(true);
 		}
 		
-	//	[Inject] private void Construct(PlayerHealth playerHealth) => _playerHealth = playerHealth;
+		[Inject] private void Construct(TreasureWindow treasureWindow) => _treasureWindow = treasureWindow;
 	}
 }

@@ -14,29 +14,28 @@ namespace Game.UI
 	{
 		[SerializeField] private Button _button;
 		private GamePause _gamePause;
-		private int _randomCoins;
+		private float _randomCoins;
 		[SerializeField] private TextMeshProUGUI _coinsText;
 		private CountUp _countUp;
 		private PlayerData _playerData;
 		private CoinsUpdater _coinsUpdater;
 		private WaitForSeconds _interval;
 
-		private void OnEnable() => _gamePause.SetPause(true);
-
-		private void OnDisable() => _gamePause.SetPause(false);
-
-		private void OnGUI()
+		private void OnEnable()
 		{
+			_gamePause.SetPause(true);
 			_button.gameObject.SetActive(false);
-			_randomCoins = Random.Range(1, 100);
+			_randomCoins = Random.Range(1f, 100f);
 			_coinsText.text = "0";
 			_interval = new WaitForSeconds(2.6f);
 			StartCoroutine(StartCalculating());
 		}
 
+		private void OnDisable() => _gamePause.SetPause(false);
+
 		public void GetReward()
 		{
-			_playerData.AddRewardCoins(_randomCoins);
+			_playerData.AddRewardCoins(Mathf.FloorToInt(_randomCoins));
 			_coinsUpdater.OnCountChanged?.Invoke();
 		}
 
@@ -49,7 +48,7 @@ namespace Game.UI
 		}
 		
 		private IEnumerator StartCalculating() {
-			_countUp.StartCoroutine(_countUp.Activate(_randomCoins, 0, _coinsText));
+			_countUp.Initialize(_randomCoins, 0, _coinsText);
 			yield return _interval;
 			_button.gameObject.SetActive(true);
 		}
