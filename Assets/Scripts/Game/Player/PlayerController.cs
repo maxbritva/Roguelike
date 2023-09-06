@@ -8,6 +8,7 @@ namespace Game.Player
 {
 	public class PlayerController : MonoBehaviour, IMovable
 	{
+		[SerializeField] private Rigidbody2D _rigidbody2D;
 		[SerializeField] private Animator _playerAnimator;
 		[SerializeField] private float _moveSpeed;
 		private Vector3 _movement;
@@ -23,9 +24,11 @@ namespace Game.Player
 			_playerAnimator.SetFloat("Horizontal", _movement.x);
 			_playerAnimator.SetFloat("Vertical", _movement.y);
 			_playerAnimator.SetFloat("Speed", _movement.sqrMagnitude);
-			transform.position += _movement.normalized * (_moveSpeed * Time.deltaTime);
+			//transform.position += _movement.normalized * (_moveSpeed * Time.deltaTime);
 		}
-		
+
+		private void FixedUpdate() => _rigidbody2D.AddForce(_movement * _moveSpeed /4,ForceMode2D.Impulse);
+
 		[Inject] private void Construct(GamePause pause) => _gamePause = pause;
 	}
 }

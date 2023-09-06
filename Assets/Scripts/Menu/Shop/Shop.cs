@@ -87,7 +87,7 @@ namespace Menu.Shop
 		}
 		
 		private void SpendCoins(ItemShop target) {
-			_playerData.TrySpendCoins(-target.Cost);
+			_playerData.TrySpendCoins(target.Cost);
 			_saveSystem.SaveData();
 			_menuUIUpdater.UpdateUI();
 		}
